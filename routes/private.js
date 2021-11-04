@@ -6,22 +6,21 @@ const router = express.Router();
 
 router.get('/private', (req, res, next) => {
     res.json({
-      user: req.user,
       email: req.user.email
     })
   }
 );
 
 router.post('/todos', (req, res, next) => {
-    User.findOne({ email: req.user.email}, (err, USER) => {
-        if(err){
-            console.log(err);
-            throw err
-        };
-        if(!USER){
-            return res.status(403).send({message: "Something went wrong"});
-        }
-    }),
+    // User.findOne({ email: req.user.email}, (err, USER) => {
+    //     if(err){
+    //         console.log(err);
+    //         throw err
+    //     };
+    //     if(!USER){
+    //         return res.status(403).send({message: "Something went wrong"});
+    //     }
+    // }),
     Todo.findOne({ user: req.user.email}, (err, todo) => {
         if(err){
             console.log(err);
@@ -37,7 +36,7 @@ router.post('/todos', (req, res, next) => {
             return res.send("ok");
         }else{
             Todo.create({
-                user: USER._id,
+                user: req.user._id,
                 items: req.body.items
                 },
                 (err, ok) => {
