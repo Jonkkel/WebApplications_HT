@@ -13,14 +13,12 @@ router.get('/private', (req, res, next) => {
 );
 
 router.post('/todos', (req, res, next) => {
-    User.findOne({ email: req.user.email}, (err, user) => {
+    User.findOne({ email: req.user.email}, (err, USER) => {
         if(err){
             console.log(err);
             throw err
         };
-        if(user){
-            console.log(user);
-        }else{
+        if(!USER){
             return res.status(403).send({message: "Something went wrong"});
         }
     }),
@@ -39,7 +37,7 @@ router.post('/todos', (req, res, next) => {
             return res.send("ok");
         }else{
             Todo.create({
-                user: user._id,
+                user: USER._id,
                 items: req.body.items
                 },
                 (err, ok) => {
