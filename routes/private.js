@@ -6,6 +6,7 @@ const router = express.Router();
 
 router.get('/private', (req, res, next) => {
     res.json({
+      user: req.user,
       email: req.user.email
     })
   }
@@ -19,6 +20,8 @@ router.post('/todos', (req, res, next) => {
         };
         if(user){
             console.log(user);
+        }else{
+            return res.status(403).send({message: "Something went wrong"});
         }
     }),
     Todo.findOne({ user: req.user.email}, (err, todo) => {
@@ -29,11 +32,14 @@ router.post('/todos', (req, res, next) => {
         if(todo){
             var array = [];
             array = todo.items;
-            console.log(todo);
-            console.log(array);
+            for (let i = 0; i < req.body.items.length;i++){
+                array.push(req.body.items[i]);
+            }
+            todo.items = array; 
+            return res.send("ok");
         }else{
             Todo.create({
-                user: req.user.email,
+                user: user._id,
                 items: req.body.items
                 },
                 (err, ok) => {
