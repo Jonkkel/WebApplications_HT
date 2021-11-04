@@ -45,7 +45,7 @@ router.post("/register",
 
 router.post("/login",
     body("email").trim().escape(),
-    body("password").escape(),
+    body("password"),
     (req, res, next) => {
         User.findOne({ email: req.body.email}, (err, user) => {
             if(err) throw err;
