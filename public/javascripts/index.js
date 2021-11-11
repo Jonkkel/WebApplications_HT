@@ -22,7 +22,7 @@ function initializeCode3() {
         preventScrolling: true
     };
     console.log(localStorage.getItem("auth_token") === "null");
-    if (localStorage.getItem("auth_token") === "null"){
+    if (localStorage.getItem("auth_token") === "null" || localStorage.getItem("auth_token") === null ){
         const login = document.createElement("a");
         const register = document.createElement("a");
 
@@ -36,6 +36,7 @@ function initializeCode3() {
         document.body.appendChild(register);
     }else{
         const button = document.createElement("button");
+        button.id = "logout";
         const p = document.createElement("p");
         button.innerHTML = "Logout";
         fetch("http://localhost:1234/api/private", {
