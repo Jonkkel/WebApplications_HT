@@ -23,10 +23,6 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.get("/", (req, res) => {
-    res.send("<h1>Hello World!</h1>");
-});
-
 app.use("/api/user", require("./api/register.js"));
 app.use(passport.initialize());
 app.use('/api',passport.authenticate('jwt', {session: false}),require("./routes/private.js"));

@@ -12,6 +12,7 @@ router.get('/private', (req, res, next) => {
 );
 
 router.post('/todos', (req, res, next) => {
+    console.log(req.body.items);
     // User.findOne({ email: req.user.email}, (err, USER) => {
     //     if(err){
     //         console.log(err);
@@ -21,7 +22,6 @@ router.post('/todos', (req, res, next) => {
     //         return res.status(403).send({message: "Something went wrong"});
     //     }
     // }),
-    console.log("jee");
     Todo.findOne({ user: req.user._id}, (err, todo) => {
 
         console.log(req.user._id);
@@ -30,19 +30,11 @@ router.post('/todos', (req, res, next) => {
             throw err
         };
         if(todo){
-            var array = [];
-            array = todo.items;
-            console.log("array ennen:", array);
-            console.log(req.body.items);
             for (let i = 0; i < req.body.items.length;i++){
-                array.push(req.body.items[i]);
-                console.log(req.body.items[i])
+                todo.items.push(req.body.items[i]);
             }
-            console.log("array JÄLKEEN:", array);
-            todo.items = array; 
-            console.log(array);
             todo.save();
-            return res.send(array);
+            return res.send(todo.items);
         }else{
             Todo.create({
                 user: req.user._id,
