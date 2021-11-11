@@ -21,7 +21,7 @@ function initializeCode3() {
         onCloseEnd: null,
         preventScrolling: true
     };
-    console.log(localStorage.getItem("auth_token") === "null");
+    console.log(localStorage.getItem("auth_token"));
     if (localStorage.getItem("auth_token") === "null" || localStorage.getItem("auth_token") === null ){
         const login = document.createElement("a");
         const register = document.createElement("a");
