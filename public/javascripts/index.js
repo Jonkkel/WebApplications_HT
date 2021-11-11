@@ -51,7 +51,7 @@ function initializeCode3() {
                 p.innerHTML = data.email;
             });
         button.addEventListener("click", function() {
-            localStorage.setItem("auth_token",null);
+            localStorage.removeItem('auth_token');
             window.location.href = 'http://localhost:1234/';
         });
         document.body.appendChild(p);
@@ -68,6 +68,10 @@ function initializeCode3() {
         document.body.appendChild(br);
         document.body.appendChild(br1);
         document.body.appendChild(button);
+
+        var container = document.createElement("div");
+        document.body.appendChild(container);
+        
         fetch("http://localhost:1234/api/todos", {
             method: "post",
             headers: {
@@ -78,14 +82,38 @@ function initializeCode3() {
             })
             .then((response) => response.json())
             .then((data) => {
-                console.log(data.todos);
-                for( let i = 0; i < data.todos.length; i++){
+                console.log(data);
+                for( let i = 0; i < data.length; i++){
                     var p = document.createElement("p");
-                    p.innerHTML = data.todos[i];
-                    document.body.append(p);
+                    p.innerHTML = data[i];
+                    container.appendChild(p);
                 }
             });
         
+        text.addEventListener("keyup", function(event) {
+            if (event.code === 'Enter') {
+                while (container.firstChild) {
+                    container.removeChild(container.lastChild);
+                }
+                fetch("http://localhost:1234/api/todos", {
+                method: "post",
+                headers: {
+                    'Authorization': 'Bearer ' + localStorage.getItem("auth_token"),
+                    "Content-type": "application/json"
+                },
+                body: JSON.stringify({items: [text.value]}),
+                })
+                .then((response) => response.json())
+                .then((data) => {
+                    console.log(data);
+                    for( let i = 0; i < data.length; i++){
+                        var p = document.createElement("p");
+                        p.innerHTML = data[i];
+                        container.appendChild(p);
+                    }
+                });
+            }
+        });
 
     }
     
