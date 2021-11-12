@@ -42,7 +42,8 @@ router.post('/todos', (req, res, next) => {
                 },
                 (err, ok) => {
                     if(err) throw err;
-                    return res.send(todo.items);
+                    console.log(req.body.items);
+                    return res.send(req.body.items);
             })
         }
     })
