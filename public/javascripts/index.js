@@ -92,9 +92,9 @@ function initializeCode3() {
         
         text.addEventListener("keyup", function(event) {
             if (event.code === 'Enter') {
-                while (container.firstChild) {
-                    container.removeChild(container.lastChild);
-                }
+                // while (container.firstChild) {
+                //     container.removeChild(container.lastChild);
+                // }
                 fetch("http://localhost:1234/api/todos", {
                 method: "post",
                 headers: {
@@ -103,15 +103,15 @@ function initializeCode3() {
                 },
                 body: JSON.stringify({items: [text.value]}),
                 })
-                .then((response) => response.json())
-                .then((data) => {
-                    console.log(data);
-                    for( let i = 0; i < data.length; i++){
-                        var p = document.createElement("p");
-                        p.innerHTML = data[i];
-                        container.appendChild(p);
-                    }
-                });
+                // .then((response) => response.json())
+                // .then((data) => {
+                //     console.log(data);
+                //     for( let i = 0; i < data.length; i++){
+                //         var p = document.createElement("p");
+                //         p.innerHTML = data[i];
+                //         container.appendChild(p);
+                //     }
+                // });
             }
         });
 
