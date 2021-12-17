@@ -20,7 +20,6 @@ router.get('/posts', (req, res, next) => {
                 ids.push(snip[i]._id);
                 creators.push(snip[i].creator);
             }
-            console.log(creators);
             return res.send({"snippets": snips, "ids": ids, "creators": creators});
         }else{
             console.log("hups");
@@ -65,8 +64,6 @@ router.post('/edit', (req, res, next) => {
         if(!snip){
             return res.status(403).json({message: "Error with finding post."});
         }else{
-            console.log("jee");
-            console.log(req.body.text);
             snip.items = req.body.text;
             snip.save();
             return res.json({message: "ok"});

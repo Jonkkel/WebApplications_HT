@@ -106,7 +106,6 @@ function getPosts(flag){
         })
         .then((response) => response.json())
         .then((data) => {
-            console.log(data);
             // Create elements for pager
             if (data.snippets.length > 10){
                 const ul = document.getElementById("pager");
@@ -144,7 +143,6 @@ function getPosts(flag){
 
 // Getting posts for given page
 function getPostsForPage(data, flag, ind){
-    console.log(data);
     // variable k helps to get only 10 posts per page
     var k;
     if(ind*10 > data.snippets.length){
