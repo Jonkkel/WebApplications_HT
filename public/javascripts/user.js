@@ -13,6 +13,7 @@ function initializeCode4() {
     
 }
 
+// Gets user data from database and displays it
 function getUserData(){
     const container = document.getElementById("container");
     fetch("http://localhost:1234/api/userdata", {
@@ -43,6 +44,7 @@ function getUserData(){
         });
 }
 
+// Handles bio updating
 async function updateBio(){
     const biotext = document.getElementById("biotext");
     const bio = document.getElementById("bio");
@@ -65,4 +67,10 @@ async function updateBio(){
                 
             }
         });
+}
+
+// logout
+function logout(){
+    localStorage.removeItem('auth_token');
+    window.location.href = 'http://localhost:1234/';
 }

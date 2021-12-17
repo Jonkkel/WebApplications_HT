@@ -13,6 +13,7 @@ function initializeCode3() {
     // Aka user hasn't logged in
     console.log(localStorage.getItem("auth_token"));
     
+    // User hasn't logged in so only show posts and comments
     if (localStorage.getItem("auth_token") === null ){
         // Hide the post input - it is secured with authentication so this should be ok.
         const postInput = document.getElementById("header");
@@ -30,6 +31,7 @@ function initializeCode3() {
         profile_mobile.style.display='none';
 
         getPosts(false);
+        
     }else{
         const login = document.getElementById("login");
         const login_mobile = document.getElementById("login_mobile");
@@ -39,21 +41,6 @@ function initializeCode3() {
         login_mobile.style.display='none';
         register.style.display='none';
         register_mobile.style.display='none';
-
-        // const mobileLinks = document.getElementById("mobile-links");
-        // const li = document.createElement("li");
-        // const a = document.createElement("a");
-        // a.href = "http://localhost:1234/";
-        // a.innerHTML = "Logout";
-        // a.id = "logout";
-        // li.appendChild(a);
-        // mobileLinks.appendChild(li);
-        // getUserEmail(user);
-
-        // Logout button
-        // a.addEventListener("click", function() {
-        //     logout();
-        // });
 
         // Post input and logout button added to body
         const postInput = document.getElementById("textarea1");
@@ -68,11 +55,13 @@ function initializeCode3() {
 
     }
 }
+// sets current page to "mainpage"
 function setCurrectPage(){
     localStorage.setItem("currentPage", 1);
 }
 
 
+// Handles post posting
 function addPost(postInput){
     fetch("http://localhost:1234/api/post", {
         method: "post",
@@ -85,6 +74,7 @@ function addPost(postInput){
         location.reload();
 }
 
+// Handles comment posting
 function addComment(commentInput){
     fetch("http://localhost:1234/api/comment", {
             method: "post",
@@ -181,13 +171,14 @@ function getPostsForPage(data, flag, ind){
         
         
         
-        // Add edit button if the current user is same as post creator
+        
         
 
         section.appendChild(ul);
 
         // If flag then user is logged in and we can show the comment input
         if (flag == true){
+            // Add edit button if the current user is same as post creator
             createEdit(data.creators[i], data.ids[i], data.snippets[i], div, code);
             const commentInput = document.createElement("textarea");
             commentInput.placeholder = "Add comment: ";
@@ -210,12 +201,14 @@ function getPostsForPage(data, flag, ind){
     }
 }
 
+// removes all posts from given parent object
 function removeChild(parent){
     while (parent.lastChild) {
         parent.removeChild(parent.lastChild);
     }
 }
 
+// logout button
 function logout(){
     localStorage.removeItem('auth_token');
     window.location.href = 'http://localhost:1234/';
@@ -246,8 +239,9 @@ async function getComments(id, ul, flag){
                 pre.appendChild(code);
                 div.appendChild(pre);
                 li.appendChild(div)
-                ul.appendChild(li);
                 ul.appendChild(divider);
+                ul.appendChild(li);
+                
                
             }
         })
@@ -255,11 +249,10 @@ async function getComments(id, ul, flag){
 }
 
 
+// Create edit and submit buttons and everything needed to let user edit comments/posts
 async function createEdit(creator, postID, ogtext, div, code){
     user = await getUserEmail();    
     if (creator === user){
-        console.log(code.innerHTML);
-        console.log("yes)");
 
         var editButton = document.createElement("a");
         var submitButton = document.createElement("a");
@@ -273,8 +266,8 @@ async function createEdit(creator, postID, ogtext, div, code){
         div.appendChild(document.createTextNode( '\u00A0' ));
         div.appendChild(submitButton);
 
+        // If edit pressed let user edit comment/post
         editButton.addEventListener("click", () =>{
-            console.log("yes");
             code.contentEditable = true;
             code.innerHTML = ogtext;
             code.focus();
@@ -282,11 +275,19 @@ async function createEdit(creator, postID, ogtext, div, code){
             submitButton.className = "btn-small waves-effect waves-black red darken-2";
             M.toast({html: 'You can now edit your post/comment.'})
         });
+        // If submit pressed 
         submitButton.addEventListener("click", () =>{
-            console.log(code.innerHTML);
-            console.log(ogtext);
+            var codeText = code.innerHTML;
             code.contentEditable = false;
-            ogtext = code.innerHTML.replace('&amp;', '&').replace('&gt;', '>').replace('&lt;', '<');
+
+            // Changing &amp = & and &gt and &lt to > <
+            var reg = new RegExp('&amp;', 'g');
+            codeText = codeText.replace(reg, '&');
+            var reg = new RegExp('&gt;', 'g');
+            codeText = codeText.replace(reg, '>');
+            var reg = new RegExp('&lt;', 'g');
+            codeText = codeText.replace(reg, '<');
+            ogtext = codeText;
             fetch("http://localhost:1234/snippets/edit", {
                 method: "POST",
                 headers: {
@@ -310,6 +311,7 @@ async function createEdit(creator, postID, ogtext, div, code){
     }
 }
 
+// Returns current users email
 async function getUserEmail(){
     // Adding user email to page
     var user = "";

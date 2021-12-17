@@ -24,6 +24,7 @@ function initializeCode2() {
     });
 }
 
+// Handles login
 function login(){
     var email = document.getElementById("email");
     var pass = document.getElementById("password");

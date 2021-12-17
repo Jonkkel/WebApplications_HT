@@ -17,6 +17,7 @@ function initializeCode() {
     });
 }
 
+// Handles user registering
 function register(){
     
     var first_name = document.getElementById("first_name");

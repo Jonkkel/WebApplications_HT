@@ -9,7 +9,7 @@ body {
 }
 
 .Text {
-  /* overflow: auto; */
+  overflow: scroll;
   white-space: pre-line;;
   /* text-overflow: ellipsis; */
   /* max-width:80%; */

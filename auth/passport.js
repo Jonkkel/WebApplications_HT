@@ -3,6 +3,8 @@ const ExtractJwt = require('passport-jwt').ExtractJwt;
 const User = require("../models/Users");
 const passport = require('passport');
 
+
+// Handles authentication
 var opts = {}
 opts.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken();
 opts.secretOrKey = process.env.SECRET
@@ -15,7 +17,6 @@ passport.use(new JwtStrategy(opts, function(jwt_payload, done) {
             return done(null, user);
         } else {
             return done(null, false);
-            // or you could create a new account
         }
     });
 }));

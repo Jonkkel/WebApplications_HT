@@ -4,6 +4,7 @@ const Snippet = require("../models/Snippet");
 const User = require("../models/Users");
 const router = express.Router();
 
+// Gets all posts
 router.get('/posts', (req, res, next) => {
     Snippet.find({"parent": {$exists: false} }, (err, snip) => {
         if(err){
@@ -29,6 +30,7 @@ router.get('/posts', (req, res, next) => {
     })
 });
 
+// Gets all comments to a single post with ID
 router.get('/comments/:ID', (req, res, next) => {
     Snippet.find({"parent": req.params.ID}, (err, snip) => {
         if(err){
@@ -53,6 +55,7 @@ router.get('/comments/:ID', (req, res, next) => {
     })
 });
 
+// Handles post/comment editing
 router.post('/edit', (req, res, next) => {
     Snippet.findOne({_id: req.body.postID}, (err, snip) => {
         if(err){
