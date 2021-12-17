@@ -1,6 +1,7 @@
 require('dotenv').config();
 var express = require('express');
 var path = require('path');
+hljs = require('highlight.js');
 const mongoose = require("mongoose");
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
@@ -24,6 +25,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use("/api/user", require("./api/register.js"));
+app.use("/snippets", require("./api/snippets.js"));
 app.use(passport.initialize());
 app.use('/api',passport.authenticate('jwt', {session: false}),require("./routes/private.js"));
 

@@ -1,0 +1,76 @@
+<html>
+<html lang="en">
+<head>
+  <!-- Materialize css  -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel = "stylesheet" href = "https://fonts.googleapis.com/icon?family=Material+Icons">  
+  <!-- Compiled and minified CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+  
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Profile</title>
+  <link rel="stylesheet" href="/stylesheets/style.css">
+  <script src="javascripts/user.js"></script>
+  
+
+</head>
+
+<body>
+  <nav class="nav-wrapper red darken-2"></navclass>
+    <div class="container">
+      <a href="/" onclick="setCurrectPage()">Web Applications forum</a>
+      <a href="#" data-target="mobile-links" class="right sidenav-trigger">
+        <i class="material-icons">menu</i>
+      </a>
+      <ul class="right hide-on-med-and-down">
+        <li><a id="Logout">Logout</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <ul class="sidenav" id="mobile-links">
+    <li><a id="Logout">Logout</a></li>
+  </ul>
+
+  <div>
+    <div class="container" id="container">
+    
+    </div>
+    <div class="container">
+      <form class="col s12">
+        <div class="row">
+          <div class="input-field col s12">
+            <textarea id="biotext" class="materialize-textarea"></textarea>
+            <label for="biotext" >Bio text</label>
+          </div>
+        </div>
+      </form>
+      <button class="btn-small waves-effect waves-light red darken-2" onclick="updateBio()">Change bio
+        <i class="material-icons right">border_color</i>
+      </button>
+  </div>
+  </div>
+  
+  
+  
+
+
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <!-- Compiled and minified JavaScript -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+  <!-- Materialize navbar documentation - adds mobile friendly dropdown menu -->
+  <script>
+    $(document).ready(function(){
+    $('.sidenav').sidenav({ edge: 'right'});
+    })
+  </script>
+
+</body>
+
+</html>

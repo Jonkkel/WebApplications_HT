@@ -1,14 +1,79 @@
 <html>
 
 <head>
-  <title>Wuzzup</title>
+  <!-- Materialize css  -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel = "stylesheet" href = "https://fonts.googleapis.com/icon?family=Material+Icons">  
+
+  <!-- Compiled and minified CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+  <!-- <title>Wuzzup</title> -->
   <link rel="stylesheet" href="/stylesheets/style.css">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/stackoverflow-light.min.css">
   <script src="javascripts/index.js"></script>
 </head>
 
 <body>
-  <h1>Main page</h1>
-  
+  <nav class="nav-wrapper red darken-2"></navclass>
+    <div class="container">
+      <a href="/" onclick="setCurrectPage()">Web Applications forum</a>
+      <a href="#" data-target="mobile-links" class="right sidenav-trigger">
+        <i class="material-icons">menu</i>
+      </a>
+      <ul class="right hide-on-med-and-down" id="links">
+        <li id="profile"><a href="user.html">Profile</a></li>
+        <li id="login"><a href="login.html">Login</a></li>
+        <li id="register"><a href="register.html">Register</a></li>
+        <li id="logout"><a onclick="logout()" href="http://localhost:1234/">Logout</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <ul class="sidenav" id="mobile-links">
+    <li id="profile_mobile"><a  href="user.html">Profile</a></li>
+    <li id="login_mobile"><a href="login.html">login</a></li>
+    <li id="register_mobile"><a href="register.html">register</a></li>
+    <li id="logout_mobile"><a onclick="logout()" href="http://localhost:1234/">Logout</a></li>
+  </ul>
+  <br>
+  <div class="container col s12 m6 l3" id="header">
+    <div class="row">
+      <form class="col s12">
+        <div class="row">
+          <div class="input-field col s12">
+            <textarea id="textarea1" class="materialize-textarea"></textarea>
+            <label for="textarea1" >Post</label>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div class="center">
+    <div class="container col s12 m6 l3" id="container"></div>
+    <div class="container">
+      <ul class="pagination" id = "pager"></ul>
+    </div>
+  </div>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <!-- Compiled and minified JavaScript -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>
+  <!-- and it's easy to individually load additional languages -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/languages/go.min.js"></script>
+
+  <script>hljs.highlightAll();</script>
+
+  <!-- Materialize navbar documentation - adds mobile friendly dropdown menu -->
+  <script>
+    $(document).ready(function(){
+    $('.sidenav').sidenav({ edge: 'right'});
+    })
+  </script>
 </body>
 
 </html>

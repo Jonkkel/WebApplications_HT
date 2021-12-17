@@ -1,17 +1,90 @@
 <html>
 <html lang="en">
 <head>
+  <!-- Materialize css  -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel = "stylesheet" href = "https://fonts.googleapis.com/icon?family=Material+Icons">  
+  <!-- Compiled and minified CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+  
+
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Register</title>
   <link rel="stylesheet" href="/stylesheets/style.css">
-  <script src="javascripts/register.js"></script>
+
 </head>
 
 <body>
+  <nav class="nav-wrapper red darken-2"></navclass>
+    <div class="container">
+      <a href="/">Web Applications forum</a>
+      <a href="#" data-target="mobile-links" class="right sidenav-trigger">
+        <i class="material-icons">menu</i>
+      </a>
+      <ul class="right hide-on-med-and-down">
+        <li><a href="login.html">login</a></li>
+        <li class="active"><a href="register.html">register</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <ul class="sidenav" id="mobile-links">
+    <li><a href="login.html">login</a></li>
+    <li class="active"><a href="register.html">register</a></li>
+  </ul>
+
   <h1>Registration page</h1>
-  <p>  Email:<input type="email" placeholder="Enter Email" id="email"> Password:<input type="password" placeholder="Enter password" id="password"></p>
-  <input type="submit" value="Submit", id="submit">
+  <div class="row">
+      <div class="row">
+        <div class="input-field col s6">
+          <input id="first_name" type="text">
+          <label for="first_name">First Name</label>
+        </div>
+        <div class="input-field col s6">
+          <input id="last_name" type="text">
+          <label for="last_name">Last Name</label>
+        </div>
+      </div>
+      
+      <div class="row">
+        <div class="input-field col s12">
+          <input id="email" type="email">
+          <label for="email">Email</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s12">
+          <input id="password" type="password">
+          <label for="password">Password</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s12">
+          <input id="username" type="text">
+          <label for="username">Username</label>
+        </div>
+      </div>
+      <button class="btn waves-effect waves-light red darken-2" id="register" onclick="register()">Register
+        <i class="material-icons right">done</i>
+      </button>
+  </div>
+  
+ 
+
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- Compiled and minified JavaScript -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+  <script src="javascripts/register.js"></script>
+
+  <!-- Materialize navbar documentation - adds mobile friendly dropdown menu -->
+  <script>
+    $(document).ready(function(){
+    $('.sidenav').sidenav({ edge: 'right'});
+    })
+  </script>
+
 </body>
 
 </html>

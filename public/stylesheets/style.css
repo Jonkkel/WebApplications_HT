@@ -1,8 +1,43 @@
 body {
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  background-color: antiquewhite;
 }
 
-a {
-  color: #00B7FF;
+.center {
+  text-align: left
 }
+
+.Text {
+  /* overflow: auto; */
+  white-space: pre-line;;
+  /* text-overflow: ellipsis; */
+  /* max-width:80%; */
+  }
+::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color:  rgb(63, 56, 56);
+  opacity: 0.5; /* Firefox */
+}
+
+/* .container{
+  background-color: aqua;
+} */
+/* .header{
+  background-color: red;
+} */
+
+.section{
+  background-color:beige;
+  margin: 20px;
+  padding: 10px;
+  box-shadow: 3px 3px 3px 3px grey;
+  border-radius: 5px;
+}
+
+/* #container{
+  background-color:beige;
+  margin: 20px;
+  padding: 10px;
+  box-shadow: 3px 3px 3px 3px grey;
+  border-radius: 5px;
+} */
